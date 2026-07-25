@@ -147,6 +147,33 @@
     .detail-copy{display:grid;grid-template-columns:1fr 1fr;gap:22px}
     .detail-copy h4{margin:0 0 8px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--cyan)}
     .detail-copy p{color:var(--muted);margin:0}
+    .media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .media-card{padding:20px;overflow:hidden}
+    .media-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .media-card-head h3{font-size:1.2rem;margin:4px 0 0}
+    .media-date{white-space:nowrap;padding:6px 9px;border-radius:999px;background:rgba(97,245,168,.08);border:1px solid rgba(97,245,168,.22);color:var(--green);font-size:.66rem;font-weight:900}
+    .media-gallery{display:grid;grid-template-columns:1.45fr 1fr;grid-template-rows:105px 105px;gap:8px}
+    .gallery-shot{position:relative;overflow:hidden;padding:0;border:1px solid var(--line);border-radius:15px;background:#081321;cursor:zoom-in}
+    .gallery-shot:first-child{grid-row:1/3}
+    .gallery-shot img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+    .gallery-shot:hover img{transform:scale(1.035)}
+    .gallery-shot span{position:absolute;left:8px;bottom:8px;padding:4px 7px;border-radius:8px;background:rgba(7,16,30,.78);color:#fff;font-size:.62rem;font-weight:850;backdrop-filter:blur(8px)}
+    .photo-credit{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.66rem;margin:8px 2px 14px}
+    .photo-credit a{color:var(--cyan)}
+    .video-review{display:grid;grid-template-columns:128px 1fr;gap:13px;align-items:center;padding:10px;border:1px solid rgba(255,0,0,.18);border-radius:16px;background:rgba(255,255,255,.025);text-decoration:none;transition:.2s ease}
+    .video-review:hover{border-color:#ff4b4b;background:rgba(255,75,75,.055);transform:translateY(-1px)}
+    .video-thumb{position:relative;aspect-ratio:16/9;border-radius:11px;overflow:hidden;background:#111}
+    .video-thumb img{width:100%;height:100%;object-fit:cover}
+    .video-thumb:after{content:"▶";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:38px;height:28px;border-radius:9px;background:#f00;color:#fff;font-size:.78rem;box-shadow:0 7px 20px rgba(0,0,0,.35)}
+    .video-copy strong{display:block;color:var(--ink);font-size:.84rem;line-height:1.3}
+    .video-copy span{display:block;color:var(--muted);font-size:.69rem;margin-top:6px}
+    .media-card:last-child{grid-column:1/-1;max-width:calc(50% - 8px);width:100%;justify-self:center}
+    .photo-dialog{width:min(94vw,1120px);padding:0;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+    .photo-dialog::backdrop{background:rgba(2,8,17,.88);backdrop-filter:blur(8px)}
+    .photo-dialog img{display:block;width:100%;max-height:78vh;object-fit:contain;background:#050b14;border-radius:22px 22px 0 0}
+    .photo-dialog-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 16px}
+    .photo-dialog-bar p{margin:0;color:var(--muted);font-size:.78rem}
+    .photo-dialog-close{width:38px;height:38px;flex:0 0 auto;border:1px solid var(--line);border-radius:50%;background:var(--card2);color:var(--ink);font-size:1.25rem;cursor:pointer}
     .charge-summary{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-bottom:18px}
     .charge-lead{padding:28px;position:relative;overflow:hidden}
     .charge-lead:after{content:"⚡";position:absolute;right:18px;bottom:-34px;font-size:9rem;line-height:1;color:rgba(56,217,255,.07);transform:rotate(-9deg)}
@@ -272,6 +299,7 @@
       .car-top{grid-template-columns:42px 1fr;gap:11px;padding:13px}.rank{font-size:2rem}.car-photo{grid-column:2;height:168px;grid-row:1/3}
       .car-name{grid-column:1/-1}.car-score{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;text-align:left;border-top:1px solid var(--line);padding-top:9px}
       .car-detail{padding:17px}.detail-grid{grid-template-columns:1fr 1fr}.detail-copy{grid-template-columns:1fr}
+      .media-grid{grid-template-columns:1fr}.media-card{padding:15px}.media-card:last-child{grid-column:auto;max-width:none}.media-gallery{grid-template-rows:92px 92px}.video-review{grid-template-columns:112px 1fr}.video-copy strong{font-size:.78rem}
       .charge-grid{grid-template-columns:1fr}.charge-lead,.charge-note{padding:21px}
       .hb-intro{grid-template-columns:1fr}.hb-identity,.hb-truth{padding:21px}.hb-specs{grid-template-columns:1fr 1fr}
       .delta-grid{grid-template-columns:1fr}.trade-grid{grid-template-columns:1fr}.hb-final{padding:21px}
@@ -336,7 +364,7 @@
       <nav class="wrap report-tabs" aria-label="Abas do relatório">
         <button class="report-tab" type="button" data-report-tab="eletricos" aria-pressed="true">
           <span class="report-tab-icon">⚡</span>
-          <span><strong>Ranking dos elétricos</strong><small>Análises, recarga, lojas e custos</small></span>
+          <span><strong>Ranking dos elétricos</strong><small>Análises, fotos, vídeos, recarga e lojas</small></span>
         </button>
         <button class="report-tab" type="button" data-report-tab="hb20s" aria-pressed="false">
           <span class="report-tab-icon">↔</span>
@@ -460,6 +488,101 @@
               <div class="detail-grid"><div class="metric"><b>280 km</b><span>autonomia Inmetro</span></div><div class="metric"><b>75 cv</b><span>potência</span></div><div class="metric"><b>230 L</b><span>porta-malas</span></div><div class="metric"><b>6 airbags</b><span>segurança passiva</span></div></div>
               <div class="detail-copy"><div><h4>Por que está aqui</h4><p>É o jeito mais barato de entrar num elétrico com bateria LFP, seis airbags e concessionária próxima. Excelente para cidade e rotina previsível.</p></div><div><h4>O que pode vetar</h4><p>Porta-malas pequeno, desempenho modesto e menor refinamento rodoviário. Não pague por wallbox sem conferir: ele não é benefício permanente em toda campanha.</p></div></div>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="midia" data-tab-content="eletricos">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker">Veja antes do test-drive</div><h2>Fotos reais e reviews recentes.</h2></div>
+          <p>Três imagens oficiais de cada carro e um review brasileiro de 2026. Toque nas fotos para ampliar ou no vídeo para abrir diretamente no YouTube.</p>
+        </div>
+        <div class="media-grid">
+          <article class="panel media-card">
+            <div class="media-card-head">
+              <div><small class="kicker">#1 · MG Motor</small><h3>MG4 Urban Luxury 54</h3></div>
+              <span class="media-date">23 jul 2026</span>
+            </div>
+            <div class="media-gallery" aria-label="Galeria oficial do MG4 Urban">
+              <button class="gallery-shot" type="button" data-photo="assets/cars/mg4-exterior.webp" data-caption="MG4 Urban — vista dianteira oficial"><img src="assets/cars/mg4-exterior.webp" loading="lazy" alt="MG4 Urban visto de frente em foto oficial"><span>Exterior</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/mg4-rear.webp" data-caption="MG4 Urban — vista traseira oficial"><img src="assets/cars/mg4-rear.webp" loading="lazy" alt="MG4 Urban visto pela traseira em foto oficial"><span>Traseira</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/mg4-interior.webp" data-caption="MG4 Urban — painel e cabine oficiais"><img src="assets/cars/mg4-interior.webp" loading="lazy" alt="Interior e painel do MG4 Urban"><span>Interior</span></button>
+            </div>
+            <div class="photo-credit"><span>Fotos reais de divulgação</span><a href="https://mgmotoroficial.com.br/model/mg4urban/" target="_blank" rel="noopener">Fonte: MG Motor</a></div>
+            <a class="video-review" href="https://www.youtube.com/watch?v=3C0xe0I0BkQ" target="_blank" rel="noopener">
+              <span class="video-thumb"><img src="https://i.ytimg.com/vi/3C0xe0I0BkQ/hqdefault.jpg" loading="lazy" alt="Miniatura do review do MG4 Urban no YouTube"></span>
+              <span class="video-copy"><strong>Novo MG4 Urban: vale a pena? Preço, autonomia, consumo e impressões</strong><span>Carros com Camanzi · 21 min 27 s · Abrir no YouTube ↗</span></span>
+            </a>
+          </article>
+
+          <article class="panel media-card">
+            <div class="media-card-head">
+              <div><small class="kicker">#2 · Geely</small><h3>Geely EX2 Max</h3></div>
+              <span class="media-date">15 jul 2026</span>
+            </div>
+            <div class="media-gallery" aria-label="Galeria oficial do Geely EX2 Max">
+              <button class="gallery-shot" type="button" data-photo="assets/cars/geely-exterior.webp" data-caption="Geely EX2 Max — exterior oficial"><img src="assets/cars/geely-exterior.webp" loading="lazy" alt="Geely EX2 Max verde em foto oficial"><span>Exterior</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/geely-interior.webp" data-caption="Geely EX2 Max — cabine oficial"><img src="assets/cars/geely-interior.webp" loading="lazy" alt="Interior do Geely EX2 Max"><span>Cabine</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/geely-space.webp" data-caption="Geely EX2 Max — porta-malas dianteiro oficial"><img src="assets/cars/geely-space.webp" loading="lazy" alt="Porta-malas dianteiro do Geely EX2 Max"><span>Frunk</span></button>
+            </div>
+            <div class="photo-credit"><span>Fotos reais de divulgação</span><a href="https://www.geelybrasil.com.br/ex2" target="_blank" rel="noopener">Fonte: Geely Brasil</a></div>
+            <a class="video-review" href="https://www.youtube.com/watch?v=-UGydzCCu8w" target="_blank" rel="noopener">
+              <span class="video-thumb"><img src="https://i.ytimg.com/vi/-UGydzCCu8w/hqdefault.jpg" loading="lazy" alt="Miniatura do review do Geely EX2 Max no YouTube"></span>
+              <span class="video-copy"><strong>Review mais completo do Geely EX2 Max: entrega o que promete?</strong><span>Canal VE · 20 min 51 s · Abrir no YouTube ↗</span></span>
+            </a>
+          </article>
+
+          <article class="panel media-card">
+            <div class="media-card-head">
+              <div><small class="kicker">#3 · GAC</small><h3>GAC Aion UT Premium</h3></div>
+              <span class="media-date">8 jul 2026</span>
+            </div>
+            <div class="media-gallery" aria-label="Galeria oficial do GAC Aion UT">
+              <button class="gallery-shot" type="button" data-photo="assets/cars/gac-exterior.webp" data-caption="GAC Aion UT — exterior oficial"><img src="assets/cars/gac-exterior.webp" loading="lazy" alt="GAC Aion UT em vista externa oficial"><span>Exterior</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/gac-rear.webp" data-caption="GAC Aion UT — banco traseiro oficial"><img src="assets/cars/gac-rear.webp" loading="lazy" alt="Banco traseiro do GAC Aion UT"><span>Banco traseiro</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/gac-interior.webp" data-caption="GAC Aion UT — tela central e painel oficiais"><img src="assets/cars/gac-interior.webp" loading="lazy" alt="Painel e tela central do GAC Aion UT"><span>Painel</span></button>
+            </div>
+            <div class="photo-credit"><span>Fotos reais de divulgação</span><a href="https://www.gacgroup.com/pt-br/hatchback/aion-ut" target="_blank" rel="noopener">Fonte: GAC Brasil</a></div>
+            <a class="video-review" href="https://www.youtube.com/watch?v=6Rk6zlMJR74" target="_blank" rel="noopener">
+              <span class="video-thumb"><img src="https://i.ytimg.com/vi/6Rk6zlMJR74/hqdefault.jpg" loading="lazy" alt="Miniatura do review do GAC Aion UT Premium no YouTube"></span>
+              <span class="video-copy"><strong>Aion UT Premium: a versão mais barata vale a pena? 204 cv e muito espaço</strong><span>Matheus — Primo Auto · 12 min 56 s · Abrir no YouTube ↗</span></span>
+            </a>
+          </article>
+
+          <article class="panel media-card">
+            <div class="media-card-head">
+              <div><small class="kicker">#4 · BYD</small><h3>BYD Dolphin GS</h3></div>
+              <span class="media-date">24 jun 2026</span>
+            </div>
+            <div class="media-gallery" aria-label="Galeria oficial do BYD Dolphin">
+              <button class="gallery-shot" type="button" data-photo="assets/cars/dolphin-exterior.webp" data-caption="BYD Dolphin GS — exterior oficial"><img src="assets/cars/dolphin-exterior.webp" loading="lazy" alt="BYD Dolphin em foto externa oficial"><span>Exterior</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/dolphin-rear.webp" data-caption="BYD Dolphin GS — traseira oficial"><img src="assets/cars/dolphin-rear.webp" loading="lazy" alt="Traseira do BYD Dolphin"><span>Traseira</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/dolphin-interior.webp" data-caption="BYD Dolphin GS — interior oficial"><img src="assets/cars/dolphin-interior.webp" loading="lazy" alt="Interior e painel do BYD Dolphin"><span>Interior</span></button>
+            </div>
+            <div class="photo-credit"><span>Fotos reais de divulgação</span><a href="https://www.byd.com/br/car/dolphin" target="_blank" rel="noopener">Fonte: BYD Brasil</a></div>
+            <a class="video-review" href="https://www.youtube.com/watch?v=JZfyDsfbTN0" target="_blank" rel="noopener">
+              <span class="video-thumb"><img src="https://i.ytimg.com/vi/JZfyDsfbTN0/hqdefault.jpg" loading="lazy" alt="Miniatura do review do BYD Dolphin GS no YouTube"></span>
+              <span class="video-copy"><strong>Novo BYD Dolphin GS 2027: versão atual por menos de R$ 140 mil</strong><span>Auto Top Brasil · 21 min 57 s · Abrir no YouTube ↗</span></span>
+            </a>
+          </article>
+
+          <article class="panel media-card">
+            <div class="media-card-head">
+              <div><small class="kicker">#5 · BYD</small><h3>BYD Dolphin Mini GS</h3></div>
+              <span class="media-date">13 jun 2026</span>
+            </div>
+            <div class="media-gallery" aria-label="Galeria oficial do BYD Dolphin Mini">
+              <button class="gallery-shot" type="button" data-photo="assets/cars/mini-exterior.webp" data-caption="BYD Dolphin Mini GS — exterior oficial"><img src="assets/cars/mini-exterior.webp" loading="lazy" alt="BYD Dolphin Mini azul em foto oficial"><span>Exterior</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/mini-interior.webp" data-caption="BYD Dolphin Mini GS — painel oficial"><img src="assets/cars/mini-interior.webp" loading="lazy" alt="Painel do BYD Dolphin Mini"><span>Interior</span></button>
+              <button class="gallery-shot" type="button" data-photo="assets/cars/mini-cabin.webp" data-caption="BYD Dolphin Mini GS — estrutura da cabine e airbags"><img src="assets/cars/mini-cabin.webp" loading="lazy" alt="Demonstração da cabine e airbags do Dolphin Mini"><span>Segurança</span></button>
+            </div>
+            <div class="photo-credit"><span>Fotos reais de divulgação</span><a href="https://www.byd.com/br/car/dolphin-mini" target="_blank" rel="noopener">Fonte: BYD Brasil</a></div>
+            <a class="video-review" href="https://www.youtube.com/watch?v=NUD28fMIqto" target="_blank" rel="noopener">
+              <span class="video-thumb"><img src="https://i.ytimg.com/vi/NUD28fMIqto/hqdefault.jpg" loading="lazy" alt="Miniatura do review do BYD Dolphin Mini GS no YouTube"></span>
+              <span class="video-copy"><strong>Novo BYD Dolphin Mini GS: assista antes de comprar</strong><span>Car Analysis — Rafael Amaral · 20 min 44 s · Abrir no YouTube ↗</span></span>
+            </a>
           </article>
         </div>
       </div>
@@ -831,9 +954,16 @@
   </footer>
 
   <nav class="mobile-nav" aria-label="Navegação rápida">
-    <a data-open-tab="hb20s" href="#seu-hb20s"><span>↔</span>Meu HB20S</a><a data-open-tab="eletricos" href="#ranking"><span>☷</span>Ranking</a><a data-open-tab="eletricos" href="#recarga"><span>⚡</span>Recarga</a><a data-open-tab="eletricos" href="#dealers"><span>⌖</span>Lojas</a>
+    <a data-open-tab="hb20s" href="#seu-hb20s"><span>↔</span>Meu HB20S</a><a data-open-tab="eletricos" href="#ranking"><span>☷</span>Ranking</a><a data-open-tab="eletricos" href="#midia"><span>▶</span>Vídeos</a><a data-open-tab="eletricos" href="#recarga"><span>⚡</span>Recarga</a><a data-open-tab="eletricos" href="#dealers"><span>⌖</span>Lojas</a>
   </nav>
   <div class="toast" id="toast">Link copiado</div>
+  <dialog class="photo-dialog" id="photoDialog" aria-labelledby="dialogCaption">
+    <img id="dialogImage" src="" alt="">
+    <div class="photo-dialog-bar">
+      <p id="dialogCaption">Foto oficial do veículo</p>
+      <button class="photo-dialog-close" id="photoDialogClose" type="button" aria-label="Fechar foto ampliada">×</button>
+    </div>
+  </dialog>
 
   <script>
     (function(){
@@ -862,6 +992,21 @@
         link.addEventListener("click",function(){activateReportTab(link.dataset.openTab,false)});
       });
       activateReportTab(location.hash==="#seu-hb20s"?"hb20s":"eletricos",false);
+
+      var photoDialog=document.getElementById("photoDialog");
+      var dialogImage=document.getElementById("dialogImage");
+      var dialogCaption=document.getElementById("dialogCaption");
+      document.querySelectorAll("[data-photo]").forEach(function(button){
+        button.addEventListener("click",function(){
+          dialogImage.src=button.dataset.photo;
+          dialogImage.alt=button.dataset.caption;
+          dialogCaption.textContent=button.dataset.caption+" · foto oficial de divulgação";
+          if(typeof photoDialog.showModal==="function"){photoDialog.showModal()}
+          else{window.open(button.dataset.photo,"_blank","noopener")}
+        });
+      });
+      document.getElementById("photoDialogClose").addEventListener("click",function(){photoDialog.close()});
+      photoDialog.addEventListener("click",function(event){if(event.target===photoDialog){photoDialog.close()}});
 
       var profiles={
         absoluto:{rank:"#1",title:"MG4 Urban Luxury 54",text:"Escolha o teto do orçamento e leve o pacote técnico mais forte da faixa. Só assine depois de validar o vão livre e a logística de revisão em Rio Preto.",link:"#car-mg"},
