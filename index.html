@@ -87,6 +87,15 @@
     .audit-icon{color:var(--green);font-size:1.1rem}
     .audit-item strong{display:block;font-size:.91rem}
     .audit-item span{display:block;color:var(--muted);font-size:.78rem}
+    .report-tabs-shell{padding:22px 0 0}
+    .report-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px;border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:var(--shadow)}
+    .report-tab{display:flex;align-items:center;justify-content:center;gap:12px;min-height:62px;padding:11px 18px;border:1px solid transparent;border-radius:16px;background:transparent;color:var(--muted);font:inherit;text-align:left;cursor:pointer;transition:.2s ease}
+    .report-tab:hover{color:var(--ink);background:rgba(255,255,255,.035)}
+    .report-tab[aria-pressed="true"]{color:#06111e;background:linear-gradient(135deg,var(--cyan),var(--green));box-shadow:0 12px 28px rgba(56,217,255,.18)}
+    .report-tab-icon{font-size:1.35rem}
+    .report-tab strong{display:block;font-size:.92rem}
+    .report-tab small{display:block;font-size:.69rem;opacity:.76;margin-top:2px}
+    [data-tab-content][hidden]{display:none!important}
     section{padding:74px 0}
     .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:25px;margin-bottom:30px}
     .kicker{color:var(--cyan);font-size:.77rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px}
@@ -257,6 +266,7 @@
       .hero{padding:38px 0 24px}.hero-grid{gap:12px}h1{font-size:3.15rem}.lead{font-size:1rem}
       .hero-actions .cta{flex:1}.hero-car{min-height:265px;margin-top:8px}.hero-car img{width:118%}.winner-float{bottom:0;left:0;padding:11px;max-width:205px}
       .winner-float strong{font-size:1.08rem}.audit-items{grid-template-columns:1fr}.audit-item:nth-child(n+3){display:none}
+      .report-tabs-shell{padding-top:14px}.report-tabs{gap:7px;padding:6px;border-radius:18px}.report-tab{min-height:58px;padding:9px 8px;gap:7px}.report-tab-icon{font-size:1.05rem}.report-tab strong{font-size:.76rem}.report-tab small{display:none}
       section{padding:52px 0}h2{font-size:2.3rem}.verdict-main,.attention{padding:21px}.verdict-points{grid-template-columns:1fr 1fr}
       .profile-result{grid-template-columns:70px 1fr;padding:17px}.profile-rank{font-size:2.7rem}.profile-result .cta{grid-column:1/-1}
       .car-top{grid-template-columns:42px 1fr;gap:11px;padding:13px}.rank{font-size:2rem}.car-photo{grid-column:2;height:168px;grid-row:1/3}
@@ -270,7 +280,8 @@
     }
     @media print{
       :root{--bg:#fff;--card:#fff;--card2:#f5f7fa;--ink:#111;--muted:#555;--line:#ddd;--shadow:none}
-      body{background:#fff}.topbar,.mobile-nav,.hero-actions,.profile-controls,.calculator,.toast{display:none!important}
+      body{background:#fff}.topbar,.mobile-nav,.hero-actions,.profile-controls,.calculator,.toast,.report-tabs-shell{display:none!important}
+      [data-tab-content][hidden]{display:block!important}
       .hero{padding-top:25px}.hero-grid{grid-template-columns:1fr 1fr}.car-detail{display:block}.car-card{break-inside:avoid}
       section{padding:35px 0}.sources details{display:block}.foot{padding-bottom:20px}
     }
@@ -296,8 +307,8 @@
           <h1>O elétrico certo, <span class="gradient">sem conversa de vendedor.</span></h1>
           <p class="lead">Ranking final de carros 0 km entre R$ 100 mil e R$ 150 mil, pensado para quem compra em Valparaíso/SP. Preço, autonomia, segurança, pós-venda e distância real até a oficina entraram na conta.</p>
           <div class="hero-actions">
-            <a class="cta cta-primary" href="#ranking">Ver ranking final ↓</a>
-            <a class="cta cta-secondary" href="#seu-hb20s">Comparar com meu HB20S</a>
+            <a class="cta cta-primary" data-open-tab="eletricos" href="#ranking">Ver ranking final ↓</a>
+            <a class="cta cta-secondary" data-open-tab="hb20s" href="#seu-hb20s">Comparar com meu HB20S</a>
           </div>
         </div>
         <div class="hero-car">
@@ -321,7 +332,20 @@
       </div>
     </div>
 
-    <section id="veredito">
+    <div class="report-tabs-shell">
+      <nav class="wrap report-tabs" aria-label="Abas do relatório">
+        <button class="report-tab" type="button" data-report-tab="eletricos" aria-pressed="true">
+          <span class="report-tab-icon">⚡</span>
+          <span><strong>Ranking dos elétricos</strong><small>Análises, recarga, lojas e custos</small></span>
+        </button>
+        <button class="report-tab" type="button" data-report-tab="hb20s" aria-pressed="false">
+          <span class="report-tab-icon">↔</span>
+          <span><strong>Meu HB20S × elétricos</strong><small>Comparação técnica completa</small></span>
+        </button>
+      </nav>
+    </div>
+
+    <section id="veredito" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Veredito do auditor</div><h2>Minha escolha final.</h2></div>
@@ -350,7 +374,7 @@
       </div>
     </section>
 
-    <section id="perfil">
+    <section id="perfil" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Escolha guiada</div><h2>O seu perfil muda o vencedor.</h2></div>
@@ -371,7 +395,7 @@
       </div>
     </section>
 
-    <section id="ranking">
+    <section id="ranking" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Ranking final</div><h2>Do mais indicado ao mais específico.</h2></div>
@@ -441,7 +465,7 @@
       </div>
     </section>
 
-    <section id="recarga">
+    <section id="recarga" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Carregamento em casa</div><h2>O que realmente acompanha cada carro.</h2></div>
@@ -492,7 +516,7 @@
       </div>
     </section>
 
-    <section id="seu-hb20s">
+    <section id="seu-hb20s" data-tab-content="hb20s" hidden>
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Seu carro é a régua</div><h2>HB20S 1.6 2015 × os cinco elétricos.</h2></div>
@@ -696,7 +720,7 @@
       </div>
     </section>
 
-    <section id="comparar">
+    <section id="comparar" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Comparação limpa</div><h2>Os números que decidem.</h2></div>
@@ -718,7 +742,7 @@
       </div>
     </section>
 
-    <section id="dealers">
+    <section id="dealers" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Partindo de Valparaíso/SP</div><h2>Concessionárias mais próximas confirmadas.</h2></div>
@@ -733,7 +757,7 @@
       </div>
     </section>
 
-    <section id="custo">
+    <section id="custo" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Calculadora simples</div><h2>Quanto gastaria de energia?</h2></div>
@@ -750,7 +774,7 @@
       </div>
     </section>
 
-    <section id="checklist">
+    <section id="checklist" data-tab-content="eletricos">
       <div class="wrap">
         <div class="section-head">
           <div><div class="kicker">Antes de pagar o sinal</div><h2>Checklist de compra sem arrependimento.</h2></div>
@@ -807,12 +831,38 @@
   </footer>
 
   <nav class="mobile-nav" aria-label="Navegação rápida">
-    <a href="#seu-hb20s"><span>↔</span>Meu HB20S</a><a href="#ranking"><span>☷</span>Ranking</a><a href="#recarga"><span>⚡</span>Recarga</a><a href="#dealers"><span>⌖</span>Lojas</a>
+    <a data-open-tab="hb20s" href="#seu-hb20s"><span>↔</span>Meu HB20S</a><a data-open-tab="eletricos" href="#ranking"><span>☷</span>Ranking</a><a data-open-tab="eletricos" href="#recarga"><span>⚡</span>Recarga</a><a data-open-tab="eletricos" href="#dealers"><span>⌖</span>Lojas</a>
   </nav>
   <div class="toast" id="toast">Link copiado</div>
 
   <script>
     (function(){
+      var reportTabs=document.querySelectorAll("[data-report-tab]");
+      var reportContents=document.querySelectorAll("[data-tab-content]");
+      function activateReportTab(name,changeHash){
+        var target=name==="hb20s"?"hb20s":"eletricos";
+        reportTabs.forEach(function(btn){
+          btn.setAttribute("aria-pressed",String(btn.dataset.reportTab===target));
+        });
+        reportContents.forEach(function(section){
+          section.hidden=section.dataset.tabContent!==target;
+        });
+        if(changeHash){
+          var nextHash=target==="hb20s"?"#seu-hb20s":"#ranking";
+          history.replaceState(null,"",nextHash);
+        }
+      }
+      reportTabs.forEach(function(btn){
+        btn.addEventListener("click",function(){
+          activateReportTab(btn.dataset.reportTab,true);
+          document.querySelector(".report-tabs-shell").scrollIntoView({behavior:"smooth",block:"start"});
+        });
+      });
+      document.querySelectorAll("[data-open-tab]").forEach(function(link){
+        link.addEventListener("click",function(){activateReportTab(link.dataset.openTab,false)});
+      });
+      activateReportTab(location.hash==="#seu-hb20s"?"hb20s":"eletricos",false);
+
       var profiles={
         absoluto:{rank:"#1",title:"MG4 Urban Luxury 54",text:"Escolha o teto do orçamento e leve o pacote técnico mais forte da faixa. Só assine depois de validar o vão livre e a logística de revisão em Rio Preto.",link:"#car-mg"},
         valor:{rank:"#1",title:"MG4 Urban Comfort 43",text:"Por R$ 129.990, preserva 150 cv, sete airbags e quinze ADAS. É a versão que eu compraria se os 299 km Inmetro atendem sua rotina.",link:"#car-mg"},
